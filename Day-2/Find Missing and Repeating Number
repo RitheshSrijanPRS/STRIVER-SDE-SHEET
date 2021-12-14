@@ -1,0 +1,33 @@
+class Solve 
+{
+    int[] findTwoElement(int arr[], int n) 
+    {
+        int xor = 0;
+        for(int i=0;i<arr.length;i++)
+        {
+            xor = xor ^ arr[i];
+        }
+        for(int i=1;i<=arr.length;i++)
+        {
+            xor = xor ^ i;
+        }
+        int rmb = xor & -xor;
+        int x=0;
+        int y=0;
+        for(int val : arr)
+        {
+            if((val&rmb)==0)
+                x=x^val;
+            else
+                y=y^val;
+        }
+        for(int i=1;i<=arr.length;i++)
+        {
+            if((i&rmb)==0)
+                x=x^i;
+            else
+                y=y^i;
+        }
+        return new int[]{x,y};
+    }
+}
