@@ -1,33 +1,49 @@
-class Solve 
-{
-    int[] findTwoElement(int arr[], int n) 
+public class Solution {
+    // DO NOT MODIFY THE LIST. IT IS READ ONLY
+    public ArrayList<Integer> repeatedNumber(final List<Integer> A) 
     {
+        ArrayList<Integer> res = new ArrayList<>();
         int xor = 0;
-        for(int i=0;i<arr.length;i++)
+        for(int i=0;i<A.size();i++)
         {
-            xor = xor ^ arr[i];
+            xor = xor ^ A.get(i);
         }
-        for(int i=1;i<=arr.length;i++)
+        for(int i=1;i<=A.size();i++)
         {
             xor = xor ^ i;
         }
         int rmb = xor & -xor;
         int x=0;
         int y=0;
-        for(int val : arr)
+        for(int val : A)
         {
             if((val&rmb)==0)
                 x=x^val;
             else
                 y=y^val;
         }
-        for(int i=1;i<=arr.length;i++)
+        for(int i=1;i<=A.size();i++)
         {
             if((i&rmb)==0)
                 x=x^i;
             else
                 y=y^i;
         }
-        return new int[]{x,y};
+        for(int val : A)
+        {
+            if(val == x)
+            {
+                res.add(x);
+                res.add(y);
+                break;
+            }
+            else if(val==y)
+            {
+                res.add(y);
+                res.add(x);
+                break;
+            }
+        }
+        return res;
     }
 }
